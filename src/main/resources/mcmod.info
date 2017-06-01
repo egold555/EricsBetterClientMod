@@ -1,0 +1,15 @@
+[
+{
+  "modid": "ebc",
+  "name": "Eric's Better Client",
+  "description": "Simple changes to how the game looks.",
+  "version": "1.0",
+  "mcversion": "1.11.2",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["Eric Golde"],
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]
