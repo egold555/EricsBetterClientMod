@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.golde.forge.betterminecraft.client.bettermenus.BetterMainMenu;
 import org.golde.forge.betterminecraft.client.bettermenus.BetterOptionsMenu;
-import org.golde.forge.betterminecraft.client.bettermenus.BetterResourcePack;
 import org.golde.forge.betterminecraft.config.BMConfig;
 
 import net.minecraft.client.Minecraft;
@@ -13,7 +12,6 @@ import net.minecraft.client.gui.Gui;
 import net.minecraft.client.gui.GuiControls;
 import net.minecraft.client.gui.GuiMainMenu;
 import net.minecraft.client.gui.GuiScreen;
-import net.minecraft.client.gui.GuiScreenResourcePacks;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -212,9 +210,6 @@ public class Events {
 		GuiScreen gui = e.getGui();
 		if(gui == null) {return;}
 		
-		if(gui.getClass() == GuiScreenResourcePacks.class){
-			e.setGui(new BetterResourcePack(Minecraft.getMinecraft().currentScreen));
-		}
 		else if(gui.getClass() == GuiMainMenu.class) {
 			e.setGui(new BetterMainMenu());
 		}

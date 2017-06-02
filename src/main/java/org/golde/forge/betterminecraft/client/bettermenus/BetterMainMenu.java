@@ -30,7 +30,7 @@ public class BetterMainMenu extends GuiMainMenu {
 		Calendar calendar = Calendar.getInstance();
 		calendar.setTime(new Date());
 		if(calendar.get(2) + 1 == 4 && calendar.get(5) == 12) {
-			Reflection.setField(this, GuiMainMenu.class, "splashText", "Happy birthday Eric!");
+			Reflection.setField(this, GuiMainMenu.class, "splashText", "field_73975_c", "Happy birthday Eric!");
 		}
 		
 		/*

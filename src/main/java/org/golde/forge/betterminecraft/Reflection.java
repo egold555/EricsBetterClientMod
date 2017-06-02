@@ -11,7 +11,7 @@ import net.minecraft.client.gui.GuiControls;
  *
  */
 public class Reflection {
-
+final static boolean inEclipse = false;
 	/**
 	 * 
 	 * @param thiss Just pass in this
@@ -19,9 +19,14 @@ public class Reflection {
 	 * @param field String of field name
 	 * @return Object to be cast to what field is
 	 */
-	public static Object getField(Object thiss, Class<?> classToModify, String field) {
+	public static Object getField(Object thiss, Class<?> classToModify, String field, String fieldObf) {
 		try {
-			Field f = classToModify.getDeclaredField(field);
+			Field f = null;
+			if(inEclipse) {
+				f = classToModify.getDeclaredField(field);
+			}else {
+				f = classToModify.getDeclaredField(fieldObf);
+			}
 			f.setAccessible(true);
 			Field modifiersField = f.getClass().getDeclaredField("modifiers");
 			modifiersField.setAccessible(true);
@@ -40,9 +45,14 @@ public class Reflection {
 	 * @param field String of field name
 	 * @param to What to set value too
 	 */
-	public static void setField(Object thiss, Class<?> classToModify, String field, Object to) {
+	public static void setField(Object thiss, Class<?> classToModify, String field, String fieldObf, Object to) {
 		try {
-			Field f = classToModify.getDeclaredField(field);
+			Field f = null;
+			if(inEclipse) {
+				f = classToModify.getDeclaredField(field);
+			}else {
+				f = classToModify.getDeclaredField(fieldObf);
+			}
 			f.setAccessible(true);
 			Field modifiersField = f.getClass().getDeclaredField("modifiers");
 			modifiersField.setAccessible(true);

@@ -64,7 +64,6 @@ public class BMConfigGui implements IModGuiFactory
 			List<IConfigElement> list = new ArrayList<IConfigElement>();
 			//Add the two buttons that will go to each config category edit screen
 			list.add(new DummyCategoryElement("World", "gui.config.ctgy.general", CategoryEntryGeneral.class));
-			list.add(new DummyCategoryElement("ResourcePacks", "gui.config.ctgy.resourcepacks", CategoryEntryResourcePacks.class));
 			return list;
 		}
 
@@ -94,39 +93,6 @@ public class BMConfigGui implements IModGuiFactory
 				return new GuiConfig(this.owningScreen, propertiesOnThisScreen,
 						this.owningScreen.modID,
 						BMConfig.CATEGORY_NAME_GENERAL,
-						this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
-						this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
-						windowTitle);
-				//this is a complicated object that specifies the category's gui screen, to better understand
-				// how it works, look into the definitions of the called functions and objects
-			}
-		}
-		
-		public static class CategoryEntryResourcePacks extends CategoryEntry
-		{
-			public CategoryEntryResourcePacks(GuiConfig owningScreen, GuiConfigEntries owningEntryList, IConfigElement prop)
-			{
-				super(owningScreen, owningEntryList, prop);
-			}
-
-			@Override
-			protected GuiScreen buildChildScreen() 
-			{
-				//The following GuiConfig object specifies the configID of the object and thus will force-save
-				// when closed.
-				//Parent GuiConfig object's entryList will also be refreshed to reflect the changes.
-				// --see GuiFactory of Forge for more info
-				//Additionally, Forge best practices say to put the path to the config file for the category as
-				// the title for the category config screen
-
-				Configuration configuration = BMConfig.getConfig();
-				ConfigElement cat_general = new ConfigElement(configuration.getCategory(BMConfig.CATEGORY_RESOURCE_PACKS));
-				List<IConfigElement> propertiesOnThisScreen = cat_general.getChildElements();
-				String windowTitle = configuration.toString();
-
-				return new GuiConfig(this.owningScreen, propertiesOnThisScreen,
-						this.owningScreen.modID,
-						BMConfig.CATEGORY_RESOURCE_PACKS,
 						this.configElement.requiresWorldRestart() || this.owningScreen.allRequireWorldRestart,
 						this.configElement.requiresMcRestart() || this.owningScreen.allRequireMcRestart,
 						windowTitle);
