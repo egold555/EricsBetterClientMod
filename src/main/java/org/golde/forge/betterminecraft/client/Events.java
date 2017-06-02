@@ -2,14 +2,18 @@ package org.golde.forge.betterminecraft.client;
 
 import java.util.List;
 
-import org.golde.forge.betterminecraft.CommonAccess;
-import org.golde.forge.betterminecraft.Constants;
-import org.golde.forge.betterminecraft.client.bettermenus.*;
+import org.golde.forge.betterminecraft.client.bettermenus.BetterMainMenu;
+import org.golde.forge.betterminecraft.client.bettermenus.BetterOptionsMenu;
+import org.golde.forge.betterminecraft.client.bettermenus.BetterResourcePack;
 import org.golde.forge.betterminecraft.config.BMConfig;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.entity.EntityPlayerSP;
-import net.minecraft.client.gui.*;
+import net.minecraft.client.gui.Gui;
+import net.minecraft.client.gui.GuiControls;
+import net.minecraft.client.gui.GuiMainMenu;
+import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiScreenResourcePacks;
 import net.minecraft.client.multiplayer.WorldClient;
 import net.minecraft.client.renderer.GlStateManager;
 import net.minecraft.entity.player.EntityPlayer;
@@ -19,21 +23,26 @@ import net.minecraftforge.client.event.GuiOpenEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderTooltipEvent;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
-import net.minecraftforge.event.world.WorldEvent;
-import net.minecraftforge.fml.client.event.ConfigChangedEvent.OnConfigChangedEvent;
 import net.minecraftforge.fml.common.eventhandler.EventPriority;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
 import net.minecraftforge.fml.relauncher.Side;
 import net.minecraftforge.fml.relauncher.SideOnly;
 
+/**
+ * Class to handle events
+ * @author Eric
+ *
+ */
 public class Events {
 
 	Minecraft mc;
 	EntityPlayerSP player;
 	WorldClient world;
 	
-	//Slime chunk F3
-	//Not so crouded F3 menu
+	/*
+	 * Not so crowded f3 menu
+	 * Display detailed slime chunk status
+	 */
 	@SubscribeEvent
 	public void onRenderF3(RenderGameOverlayEvent.Text event)
 	{
@@ -62,7 +71,7 @@ public class Events {
 		}
 	}
 
-	String time() {
+	/*String time() {
 		long timeDay = world.getTotalWorldTime();
 		int day = (int)(timeDay / 24000L) + 1;
 
@@ -70,14 +79,14 @@ public class Events {
 		int min = (int)(timeDay / 16.666666D) % 60;
 		int sec = (int)(timeDay / 0.277777D) % 60;
 		return String.format("Time: %02d:%02d:%02d (day %d)", hour, min, sec, day);
-	}
+	}*/
 
 	public void addSlimeInfoToList(List<String> list)
 	{
 		//System.out.println("S: " + BMConfig.seed);
 		if(BMConfig.seed ==0) {return;}
 		if ((player == null) || (world == null) /*|| (!this.mc.field_71474_y.field_74330_P)*/ || 
-				(!CommonAccess.isInOverworld(player))) {
+				(player.dimension == 0)) {
 			return;
 		}
 		list.add(null);
@@ -151,7 +160,10 @@ public class Events {
 		return SlimeSpawning.isInSlimeChunk(BMConfig.seed, player);
 	}
 
-	//Food bars + Space
+	/*
+	 * Render food bar space so Icons look good
+	 * TODO: Cake
+	 */
 	@SubscribeEvent
 	public void renderFoodSpace(ItemTooltipEvent event) {
 		if(!event.getItemStack().isEmpty() && event.getItemStack().getItem() instanceof ItemFood) {
@@ -166,6 +178,10 @@ public class Events {
 		}
 	}
 
+	/*
+	 * Render food bar icons on food
+	 * TODO: Cake
+	 */
 	@SubscribeEvent
 	public void renderFood(RenderTooltipEvent.PostText event) {
 		if(event.getStack() != null && event.getStack().getItem() instanceof ItemFood) {
@@ -187,6 +203,9 @@ public class Events {
 		}
 	}
 	
+	/*
+	 * Apply better Gui's
+	 */
 	@SubscribeEvent(priority = EventPriority.LOWEST, receiveCanceled = true)
 	@SideOnly(Side.CLIENT)
 	public void onGuiOpen(GuiOpenEvent e){

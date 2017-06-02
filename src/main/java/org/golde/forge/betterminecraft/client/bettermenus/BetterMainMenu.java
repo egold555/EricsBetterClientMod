@@ -37,6 +37,7 @@ public class BetterMainMenu extends GuiMainMenu {
 		 * Stop blinking relms notifications of news
 		 */
 		Minecraft.getMinecraft().gameSettings.realmsNotifications = false;
+		Minecraft.getMinecraft().gameSettings.autoJump = false;
 	}
 
 }

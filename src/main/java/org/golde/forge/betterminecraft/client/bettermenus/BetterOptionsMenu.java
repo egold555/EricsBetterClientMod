@@ -49,6 +49,12 @@ public class BetterOptionsMenu extends GuiControls{
 		buttonReset.visible = false;
 		Reflection.setField(this, GuiControls.class, "buttonReset", buttonReset);
 
+		for(GuiButton button: this.buttonList) {
+			if(button.displayString.equals("Done")) {
+				button.xPosition = this.width / 4;
+				button.width = this.height - 10;
+			}
+		}
 
 	}
 

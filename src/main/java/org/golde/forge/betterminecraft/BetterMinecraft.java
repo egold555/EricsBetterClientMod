@@ -15,6 +15,9 @@ import net.minecraftforge.fml.common.event.FMLServerStartingEvent;
 import net.minecraftforge.fml.common.network.NetworkCheckHandler;
 import net.minecraftforge.fml.relauncher.Side;
 
+/*
+ * Main class for mod.
+ */
 @Mod(modid = Constants.MOD_ID, name = Constants.MOD_NAME, version = Constants.VERSION, dependencies = Constants.DEPENDENCIES, acceptedMinecraftVersions = Constants.MC_VERSION, guiFactory= Constants.GUI_FACTORY)
 public class BetterMinecraft {
 
